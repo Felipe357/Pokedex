@@ -1,5 +1,5 @@
 
-document.addEventListener('DOMContentLoaded', function () {
+function biruleibe() {
     var stream = document.querySelector('.gallery__stream')
     var items = document.querySelectorAll('.gallery__item')
 
@@ -14,24 +14,22 @@ document.addEventListener('DOMContentLoaded', function () {
         stream.appendChild(items[0])
         items = document.querySelectorAll('.gallery__item')
     })
-})
+}
+
+var next
 
 
 function carregar() {
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=3&offset=0")
+    fetch("https://pokeapi.co/api/v2/pokemon?limit=90&offset=0")
         .then((response) => {
             return response.json();
         })
         .then((data) => {
 
-            var cont = document.querySelectorAll("div.gallery__item")
-
-            console.log(cont.length)
-
             var item = document.createElement("div")
             item.classList.add("gallery__item")
 
-            data.results.forEach(e => {
+            data.results.forEach((e, indice) => {
 
                 var poke = document.querySelector(".pokemon")
 
@@ -41,8 +39,11 @@ function carregar() {
 
                 item.appendChild(pokemon)
 
-
-                document.querySelector(".gallery__stream").appendChild(item)
+                if ((indice + 1) % 3 == 0) {
+                    document.querySelector(".gallery__stream").appendChild(item)
+                    item = document.createElement("div")
+                    item.classList.add("gallery__item")
+                }
             })
         })
 }
