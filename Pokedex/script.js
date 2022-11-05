@@ -16,11 +16,11 @@ function biruleibe() {
     })
 }
 
-var next
-
+var fetchImg
+var img
 
 function carregar() {
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=90&offset=0")
+    fetch("https://pokeapi.co/api/v2/pokemon?limit=300&offset=0")
         .then((response) => {
             return response.json();
         })
@@ -31,19 +31,29 @@ function carregar() {
 
             data.results.forEach((e, indice) => {
 
-                var poke = document.querySelector(".pokemon")
 
-                var pokemon = poke.cloneNode(true)
+                fetch(e.url)
+                    .then(res => { return res.json() })
+                    .then(y => {
 
-                pokemon.querySelector("#nome").innerHTML = e.name
+                        var poke = document.querySelector(".pokemon")
 
-                item.appendChild(pokemon)
+                        var pokemon = poke.cloneNode(true)
 
-                if ((indice + 1) % 3 == 0) {
-                    document.querySelector(".gallery__stream").appendChild(item)
-                    item = document.createElement("div")
-                    item.classList.add("gallery__item")
-                }
+                        pokemon.querySelector(".imgPoke").style.backgroundImage = "url("+y.sprites.front_default+")"
+
+                        pokemon.querySelector("#nome").innerHTML = e.name
+
+                        item.appendChild(pokemon)
+
+                        if ((indice + 1) % 3 == 0) {
+                            document.querySelector(".gallery__stream").appendChild(item)
+                            item = document.createElement("div")
+                            item.classList.add("gallery__item")
+                        }
+
+                    })
+
             })
         })
 }
