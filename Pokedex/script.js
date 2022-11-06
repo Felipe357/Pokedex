@@ -20,11 +20,13 @@ var fetchImg
 var img
 
 function carregar() {
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=300&offset=0")
+    fetch("https://pokeapi.co/api/v2/pokemon?limit=21&offset=0")
         .then((response) => {
             return response.json();
         })
         .then((data) => {
+
+            console.log(data)
 
             var item = document.createElement("div")
             item.classList.add("gallery__item")

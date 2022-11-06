@@ -1,0 +1,137 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    max-width: 100vw;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Outfit', sans-serif;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    width: 85vw;
+    height: 15vh;
+}
+
+header>span {
+    font-size: 35pt;
+    font-weight: bolder;
+}
+
+header>input {
+    width: 100%;
+    height: 5vh;
+    border-radius: 8px;
+    border: none;
+    background-color: #e2e2e2 !important;
+    display: flex;
+    text-align: center;
+    background-image: url("https://cdn-icons-png.flaticon.com/512/64/64673.png");
+    background-repeat: no-repeat;
+    background-position: 20px;
+    background-size: 1.8em;
+}
+
+main{
+    height: 85vh;
+    width: 85vw;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 60px;
+    flex-wrap: wrap;
+    gap: 100px 0px ;
+}
+
+.pokemon{
+    height: 17vh;
+    width: 25vw;
+    background-color: #8dc797;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.imagem{
+    position: relative;
+    max-height: 17vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#pokebola{
+    height: 20vh;
+    width: 11vw;
+    opacity: 50%;
+    filter: grayscale(100%);
+}
+
+#pokeImg{
+    background-image: url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png");
+    position: absolute;
+    height: 250px;
+    width: 250px;
+    image-rendering: pixelated;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.info{
+    height: 100%;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 8%;
+    justify-content: center;
+}
+
+#id{
+    font-size: 15pt;
+    color: black;
+    font-weight: bold;
+}
+
+#name{
+    font-size: 20pt;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: rgb(255, 255, 255);
+}
+
+.tipo{
+    height: 25%;
+    display: flex;
+    padding-top: 5px;
+}
+
+.type{
+    background-color: #4DB85F;
+    height: 100%;
+    width: 90px;
+    padding: 5px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 5px;
+}
+
+.type>img{
+    height: 30px;
+    width: auto;
+}
+
+.type>span{
+    font-weight: 500;
+    color: #fff;
+}
