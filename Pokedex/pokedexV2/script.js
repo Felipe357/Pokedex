@@ -1,5 +1,5 @@
 function carregar() {
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=801&offset=0")
+    fetch("https://pokeapi.co/api/v2/pokemon?limit=720&offset=0")
         .then((response) => {
             return response.json();
         })
@@ -32,9 +32,14 @@ function carregar() {
                                 type.querySelector("span").innerHTML = z.type.name
                                 type.style.backgroundColor = corType(z.type.name)
                                 pokemon.style.backgroundColor = corPoke(z.type.name)
+                            } else if (indice == 1) {
+                                var clone = type.cloneNode(true)
+                                clone.querySelector("img").src = imgPoke(z.type.name)
+                                clone.querySelector("span").innerHTML = z.type.name
+                                clone.style.backgroundColor = corType(z.type.name)
+                                pokemon.querySelector(".tipo").appendChild(clone)
                             }
                         })
-
                         document.querySelector("main").appendChild(pokemon)
 
                     })
@@ -181,12 +186,10 @@ const imgPoke = (type) => {
 
 setTimeout(() => {
     listarOrdem()
-}, 500)
+}, 900)
 
 async function listarOrdem() {
     var all = Array.from(document.querySelectorAll(".pokemon"))
-
-
 
     all.sort((a, b) => a.id - b.id);
 
@@ -196,6 +199,120 @@ async function listarOrdem() {
     })
 }
 
-// listarOrdem().then(
-//     mostrar()
-// )
+listarOrdem().then(
+    mostrar()
+)
+
+function mostrar() {
+    document.querySelector(".pokebola").classList.add("model")
+}
+
+function abrirModal() {
+    document.querySelector(".modelao").classList.toggle("model")
+}
+
+function abrirPokemon(e) {
+    abrirModal()
+    fetch("https://pokeapi.co/api/v2/pokemon/" + e.id)
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            data.types.forEach((z, indice) => {
+
+                var type = document.querySelector(".infoPoke")
+
+                if (indice == 0) {
+                    type.style.backgroundColor = corType(z.type.name)
+                    document.querySelector(".infoM").style.backgroundColor = corType(z.type.name)
+                    document.querySelector(".infoE").style.backgroundColor = corType(z.type.name)
+                    document.querySelector(".infoD").style.backgroundColor = corType(z.type.name)
+                }
+            })
+
+            document.querySelector(".foto").style.backgroundImage = "url(" + data.sprites.front_default + ")"
+            document.querySelector("#infoNome").innerHTML = data.name
+
+            data.stats.forEach(s => {
+                var status = document.querySelector(".status").cloneNode(true)
+                status.classList.remove("model")
+
+                status.querySelector("span").innerHTML = s.stat.name
+                status.querySelector(".statusBarReading").style.width = s.base_stat + "%"
+
+                document.querySelector(".infoE").appendChild(status)
+            })
+
+            data.moves.forEach(m => {
+                var move = document.querySelector(".move").cloneNode(true)
+                move.classList.remove("model")
+
+                move.querySelector("span").innerHTML = m.move.name
+
+                document.querySelector(".moves").appendChild(move)
+            })
+
+        })
+}
+
+function fecha() {
+    window.location.reload()
+}
+
+function pesquisar() {
+    var inp = document.querySelector("#inp").value.toLowerCase()
+
+    fetch("https://pokeapi.co/api/v2/pokemon/" + inp)
+        .then((response) => {
+            return response.json();
+        })
+        .then((e) => {
+
+            var poke = document.querySelector(".pokemon")
+            var pokemon = poke.cloneNode(true)
+            pokemon.classList.remove("model")
+            pokemon.id = e.id
+
+            pokemon.querySelector("#name").innerHTML = e.name
+
+            pokemon.querySelector("#id").innerHTML = "#" + e.id
+
+            pokemon.querySelector("#pokeImg").style.backgroundImage = "url(" + e.sprites.front_default + ")"
+
+            e.types.forEach((z, indice) => {
+
+                var type = pokemon.querySelector(".type")
+                type.classList.remove("model")
+
+                if (indice == 0) {
+                    type.querySelector("img").src = imgPoke(z.type.name)
+                    type.querySelector("span").innerHTML = z.type.name
+                    type.style.backgroundColor = corType(z.type.name)
+                    pokemon.style.backgroundColor = corPoke(z.type.name)
+                } else if (indice == 1) {
+                    var clone = type.cloneNode(true)
+                    clone.querySelector("img").src = imgPoke(z.type.name)
+                    clone.querySelector("span").innerHTML = z.type.name
+                    clone.style.backgroundColor = corType(z.type.name)
+                    pokemon.querySelector(".tipo").appendChild(clone)
+                }
+            })
+
+            document.querySelectorAll(".pokemon").forEach(v => {
+                if (v.id !== e.id) {
+                    v.classList.add("model")
+                }
+            })
+
+            document.querySelector("main").appendChild(pokemon)
+        })
+        .catch(
+            document.querySelectorAll(".pokemon").forEach(v => {
+                if (v.id === "") {
+                    v.classList.add("model")
+                } else {
+                    v.classList.remove("model")
+                }
+            })
+        )
+}

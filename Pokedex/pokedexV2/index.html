@@ -13,10 +13,11 @@
 <body onload="carregar()">
     <header>
         <span>Pokédex</span>
-        <input type="text" placeholder="Qual Pokémon você está procurando">
+        <input type="text" placeholder="Qual Pokémon você está procurando" id="inp" onkeyup="pesquisar()">
     </header>
     <main>
-        <div class="pokemon model">
+        <div class="pokebola"><img src="./tiposPoke/master.png" alt=""></div>
+        <div class="pokemon model" onclick="abrirPokemon(this)">
             <div class="info">
                 <span id="id">#1</span>
                 <span id="name">Bulbasaur</span>
@@ -34,8 +35,37 @@
                 <div id="pokeImg"></div>
             </div>
         </div>
-
     </main>
+    <div class="modelao model">
+            <div class="infoPoke">
+                <div class="fecha" onclick="fecha()"></div>
+                 <div class="infoE">
+                    <span>Status</span>
+                    <div class="status model">
+                        <span>HP</span>
+                        <div class="statusBar">
+                            <div class="statusBarReading"></div>
+                        </div>
+                    </div>
+                    
+                 </div>
+                 <div class="infoM">
+                    <div class="foto"></div>
+                    <div class="infoM-dados">
+                        <span id="infoNome">Nomememe</span>
+                    </div>
+                 </div>
+                 <div class="infoD">
+                    <span>Moves</span>
+
+                    <div class="moves">
+                        <div class="move model">
+                            <span>NomeMove</span>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+    </div>
 </body>
 <script src="./script.js"></script>
 
